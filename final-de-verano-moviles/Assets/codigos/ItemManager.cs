@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject prefabItem;
+    public Transform[] puntosSpawn;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        foreach (Transform punto in puntosSpawn)
+        {
+            if (punto != null)
+            {
+                Instantiate(prefabItem, punto.position, Quaternion.identity);
+            }
+        }
     }
 }
