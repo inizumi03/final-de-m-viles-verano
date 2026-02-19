@@ -11,6 +11,10 @@ public class SistemaOxigeno : MonoBehaviour
     public float velocidadConsumo = 5f;
     public float velocidadRecarga = 15f;
 
+    [Header("Alerta")]
+    public float porcentajeAlerta = 0.25f; // 25%
+    public float velocidadParpadeo = 5f;
+
     [Header("UI")]
     public Image barraOxigeno;
     public GameObject panelDerrota;
@@ -18,11 +22,13 @@ public class SistemaOxigeno : MonoBehaviour
     private float oxigenoActual;
     private bool derrotado = false;
     private bool enPlaneta = false;
+    private Color colorOriginal;
 
     void Start()
     {
         oxigenoActual = oxigenoMaximo;
         panelDerrota.SetActive(false);
+        colorOriginal = barraOxigeno.color;
     }
 
     void Update()
@@ -32,20 +38,15 @@ public class SistemaOxigeno : MonoBehaviour
         VerificarSiEstaEnPlaneta();
 
         if (enPlaneta)
-        {
             RecargarOxigeno();
-        }
         else
-        {
             ConsumirOxigeno();
-        }
 
         ActualizarUI();
+        ManejarAlertaVisual();
 
         if (oxigenoActual <= 0)
-        {
             Derrota();
-        }
     }
 
     void ConsumirOxigeno()
@@ -65,6 +66,25 @@ public class SistemaOxigeno : MonoBehaviour
         barraOxigeno.fillAmount = oxigenoActual / oxigenoMaximo;
     }
 
+    void ManejarAlertaVisual()
+    {
+        float porcentajeActual = oxigenoActual / oxigenoMaximo;
+
+        if (porcentajeActual <= porcentajeAlerta)
+        {
+            float t = Mathf.PingPong(Time.time * velocidadParpadeo, 1f);
+            barraOxigeno.color = Color.Lerp(colorOriginal, Color.red, t);
+        }
+        else
+        {
+            barraOxigeno.color = colorOriginal;
+        }
+    }
+    public void AgregarOxigeno(float cantidad)
+    {
+        oxigenoActual += cantidad;
+        oxigenoActual = Mathf.Clamp(oxigenoActual, 0, oxigenoMaximo);
+    }
     void VerificarSiEstaEnPlaneta()
     {
         enPlaneta = false;
