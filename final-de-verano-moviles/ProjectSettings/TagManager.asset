@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Planeta
   - ZonaCaida
+  - PlataformaEspecial
   layers:
   - Default
   - TransparentFX
