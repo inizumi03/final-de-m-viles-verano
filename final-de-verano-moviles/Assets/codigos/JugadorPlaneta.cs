@@ -21,10 +21,9 @@ public class JugadorPlaneta : MonoBehaviour
     private bool ajustandoRotacion;
     private Quaternion rotacionObjetivo;
 
-    //  Plataforma especial
-    private bool gravedadPersonalizada = false;
-    private Vector3 normalPlataforma;
-
+    // Superficie especial
+   
+    public PlataformaEspecial superficieActual;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -44,13 +43,18 @@ public class JugadorPlaneta : MonoBehaviour
             rb.velocity -= Vector3.Project(rb.velocity, up);
             rb.AddForce(up * fuerzaSalto, ForceMode.Impulse);
         }
+       
     }
 
     void FixedUpdate()
     {
-        if (gravedadPersonalizada)
+        if (superficieActual != null &&
+            superficieActual.EstaEnRango(transform.position))
         {
-            ModoPlataforma();
+            rb.useGravity = false;
+
+            superficieActual.Atraer(rb);
+            ModoSuperficie();
         }
         else if (enPlaneta && planetaActual != null)
         {
@@ -62,37 +66,38 @@ public class JugadorPlaneta : MonoBehaviour
         }
 
         AjustarRotacionSuave();
+
+        
     }
 
     // =========================
     // MODO PLATAFORMA
     // =========================
 
-    void ModoPlataforma()
+    void ModoSuperficie()
     {
-        rb.useGravity = false;
+        Vector3 up = superficieActual.ObtenerNormal();
 
-        // Gravedad hacia la superficie
-        rb.AddForce(-normalPlataforma * 20f, ForceMode.Acceleration);
+        // Rotación alineada a la superficie
+        Quaternion rotacion =
+            Quaternion.FromToRotation(transform.up, up) * rb.rotation;
+
+        rb.MoveRotation(
+            Quaternion.Slerp(rb.rotation, rotacion, 12f * Time.fixedDeltaTime)
+        );
 
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        Vector3 forward = Vector3.Cross(transform.right, normalPlataforma).normalized;
+        Vector3 forward = Vector3.Cross(transform.right, up).normalized;
 
         Vector3 movimiento =
             transform.right * h * velocidadLateral +
             forward * v * velocidadAdelante;
 
-        rb.velocity = movimiento + Vector3.Project(rb.velocity, -normalPlataforma);
+        Vector3 velocidadVertical = Vector3.Project(rb.velocity, up);
 
-        // Rotación alineada
-        Quaternion rotacion =
-            Quaternion.FromToRotation(transform.up, normalPlataforma) * rb.rotation;
-
-        rb.MoveRotation(
-            Quaternion.Slerp(rb.rotation, rotacion, 10f * Time.fixedDeltaTime)
-        );
+        rb.velocity = movimiento + velocidadVertical;
     }
 
     // =========================
@@ -208,8 +213,9 @@ public class JugadorPlaneta : MonoBehaviour
 
     Vector3 ObtenerUpActual()
     {
-        if (gravedadPersonalizada)
-            return normalPlataforma;
+        if (superficieActual != null &&
+            superficieActual.EstaEnRango(transform.position))
+            return superficieActual.ObtenerNormal();
 
         if (enPlaneta && planetaActual != null)
             return planetaActual.ObtenerUp(transform.position);
@@ -223,20 +229,8 @@ public class JugadorPlaneta : MonoBehaviour
         return Physics.Raycast(transform.position, direccion, distanciaSuelo, capaSuelo);
     }
 
-    // =========================
-    // ACTIVAR DESACTIVAR PLATAFORMA
-    // =========================
 
-    public void ActivarGravedadPersonalizada(Vector3 normal)
-    {
-        gravedadPersonalizada = true;
-        normalPlataforma = normal;
-    }
 
-    public void DesactivarGravedadPersonalizada()
-    {
-        gravedadPersonalizada = false;
-    }
-
+    
 
 }
