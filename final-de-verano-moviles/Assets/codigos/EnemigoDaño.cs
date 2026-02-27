@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class EnemigoDaño : MonoBehaviour
 {
-    [Header("Sistema Derrota")]
-    public int golpesParaPerder = 3;
+    [Header("Sistema de Vidas Visuales")]
+    public GameObject[] imagenesDaño; // 3 imágenes
     private int golpesActuales = 0;
+
+    [Header("Derrota")]
     public GameObject canvasDerrota;
 
     [Header("Drop al morir")]
@@ -20,23 +22,21 @@ public class EnemigoDaño : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Player")) return;
 
-        // Verificamos si el jugador está atacando
-        Collider colliderAtaque = collision.gameObject
-            .GetComponentInChildren<Collider>();
-
-        if (colliderAtaque != null && colliderAtaque.enabled)
-        {
-            return; // Si está atacando, no recibe daño
-        }
-
         golpesActuales++;
 
-        if (golpesActuales >= golpesParaPerder)
+        // Si todavía está dentro del rango de imágenes
+        if (golpesActuales <= imagenesDaño.Length)
+        {
+            imagenesDaño[golpesActuales - 1].SetActive(true);
+        }
+
+        // Si supera las imágenes → pierde
+        if (golpesActuales > imagenesDaño.Length)
         {
             if (canvasDerrota != null)
             {
                 canvasDerrota.SetActive(true);
-                Time.timeScale = 0f; // 🔥 pausa el juego
+                Time.timeScale = 0f;
             }
         }
     }
