@@ -81,7 +81,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 15d91f53302e333468b01c993b22cad7,
         type: 3}
       propertyPath: m_Name
-      value: RedPill
+      value: capsula oxigeno
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -135,4 +135,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7274ce2828225a64b909c0fcb142f487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cantidadOxigeno: 10
+  cantidadOxigeno: 15

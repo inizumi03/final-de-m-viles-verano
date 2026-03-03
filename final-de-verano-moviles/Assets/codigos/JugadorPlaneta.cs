@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Terresquall;
 
 public class JugadorPlaneta : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class JugadorPlaneta : MonoBehaviour
     public float fuerzaSalto = 10f;
     public float distanciaSuelo = 1.2f;
     public LayerMask capaSuelo;
-
+    private bool saltoMovil;
     public float velocidadAjusteRotacion = 5f;
 
     private Rigidbody rb;
@@ -36,14 +38,19 @@ public class JugadorPlaneta : MonoBehaviour
     {
         DetectarPlaneta();
 
-        if (Input.GetKeyDown(KeyCode.Space) && EstaEnSuelo())
+        if (Input.GetKeyDown(KeyCode.Space) || saltoMovil)
         {
-            Vector3 up = ObtenerUpActual();
+            if (EstaEnSuelo())
+            {
+                Vector3 up = ObtenerUpActual();
 
-            rb.velocity -= Vector3.Project(rb.velocity, up);
-            rb.AddForce(up * fuerzaSalto, ForceMode.Impulse);
+                rb.velocity -= Vector3.Project(rb.velocity, up);
+                rb.AddForce(up * fuerzaSalto, ForceMode.Impulse);
+            }
+
+            saltoMovil = false; // se limpia siempre
         }
-       
+
     }
 
     void FixedUpdate()
@@ -69,7 +76,21 @@ public class JugadorPlaneta : MonoBehaviour
 
         
     }
+    void ObtenerInput(out float h, out float v)
+    {
+        float hTeclado = Input.GetAxis("Horizontal");
+        float vTeclado = Input.GetAxis("Vertical");
 
+        float hJoystick = VirtualJoystick.GetAxis("Horizontal");
+        float vJoystick = VirtualJoystick.GetAxis("Vertical");
+
+        h = Mathf.Clamp(hTeclado + hJoystick, -1f, 1f);
+        v = Mathf.Clamp(vTeclado + vJoystick, -1f, 1f);
+    }
+    public void BotonSalto()
+    {
+        saltoMovil = true;
+    }
     // =========================
     // MODO PLATAFORMA
     // =========================
@@ -86,8 +107,8 @@ public class JugadorPlaneta : MonoBehaviour
             Quaternion.Slerp(rb.rotation, rotacion, 12f * Time.fixedDeltaTime)
         );
 
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        float h, v;
+        ObtenerInput(out h, out v);
 
         Vector3 forward = Vector3.Cross(transform.right, up).normalized;
 
@@ -119,8 +140,8 @@ public class JugadorPlaneta : MonoBehaviour
             Quaternion.Slerp(rb.rotation, rotacionPlaneta, 10f * Time.fixedDeltaTime)
         );
 
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        float h, v;
+        ObtenerInput(out h, out v);
 
         Vector3 forward = Vector3.Cross(transform.right, up).normalized;
 
@@ -130,6 +151,7 @@ public class JugadorPlaneta : MonoBehaviour
 
         rb.velocity = movimiento + Vector3.Project(rb.velocity, up);
     }
+  
 
     // =========================
     //  MODO NORMAL
@@ -139,8 +161,8 @@ public class JugadorPlaneta : MonoBehaviour
     {
         rb.useGravity = true;
 
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        float h, v;
+        ObtenerInput(out h, out v);
 
         Vector3 movimiento =
             Vector3.right * h * velocidadLateral +
