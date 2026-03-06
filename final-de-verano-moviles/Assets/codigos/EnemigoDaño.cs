@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemigoDaño : MonoBehaviour
 {
     [Header("Sistema de Vidas Visuales")]
-    public GameObject[] imagenesDaño; // 3 imágenes
+    public GameObject[] imagenesDaño; // imágenes que se activan al recibir daño
     private int golpesActuales = 0;
 
     [Header("Derrota")]
@@ -13,6 +13,12 @@ public class EnemigoDaño : MonoBehaviour
 
     [Header("Drop al morir")]
     public GameObject prefabDrop;
+
+    [Header("Combate")]
+    public float fuerzaEmpujon = 8f;
+    public float tiempoEmpujon = 0.25f;
+
+    private bool jugadorInvulnerable = false;
 
     // =========================
     // DAÑO AL JUGADOR
@@ -22,15 +28,25 @@ public class EnemigoDaño : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Player")) return;
 
+        if (jugadorInvulnerable) return;
+
+        JugadorPlaneta jugador = collision.gameObject.GetComponent<JugadorPlaneta>();
+        if (jugador == null) return;
+
+        // Dirección para empujar al jugador lejos del enemigo
+        Vector3 direccion = (collision.transform.position - transform.position).normalized;
+
+        jugador.RecibirEmpujon(direccion, fuerzaEmpujon, tiempoEmpujon);
+
         golpesActuales++;
 
-        // Si todavía está dentro del rango de imágenes
+        // Activar imágenes de daño
         if (golpesActuales <= imagenesDaño.Length)
         {
             imagenesDaño[golpesActuales - 1].SetActive(true);
         }
 
-        // Si supera las imágenes → pierde
+        // Si supera las imágenes → derrota
         if (golpesActuales > imagenesDaño.Length)
         {
             if (canvasDerrota != null)
@@ -39,6 +55,19 @@ public class EnemigoDaño : MonoBehaviour
                 Time.timeScale = 0f;
             }
         }
+
+        StartCoroutine(InvulnerabilidadJugador());
+    }
+
+    // =========================
+    // INVULNERABILIDAD
+    // =========================
+
+    IEnumerator InvulnerabilidadJugador()
+    {
+        jugadorInvulnerable = true;
+        yield return new WaitForSeconds(2f);
+        jugadorInvulnerable = false;
     }
 
     // =========================

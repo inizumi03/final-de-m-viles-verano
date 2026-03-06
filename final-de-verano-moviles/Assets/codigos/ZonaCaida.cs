@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class ZonaCaida : MonoBehaviour
 {
+    [Header("Objetos que reaparecen al respawn")]
+    public List<GameObject> objetosRespawn = new List<GameObject>();
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            PlayerRespawn respawn = other.GetComponent<PlayerRespawn>();
+        if (!other.CompareTag("Player")) return;
 
-            if (respawn != null)
+        PlayerRespawn respawn = other.GetComponent<PlayerRespawn>();
+
+        if (respawn != null)
+        {
+            respawn.Respawn();
+        }
+
+        // Reactivar objetos
+        foreach (GameObject obj in objetosRespawn)
+        {
+            if (obj != null)
             {
-                respawn.Respawn();
+                obj.SetActive(true);
             }
         }
     }

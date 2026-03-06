@@ -15,4 +15,8 @@ public class ContadorPuntos : MonoBehaviour
         textoPuntos.text = puntos.ToString();
     }
 
+    public int ObtenerPuntos()
+    {
+        return puntos;
+    }
 }

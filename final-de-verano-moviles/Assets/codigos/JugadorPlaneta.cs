@@ -16,6 +16,11 @@ public class JugadorPlaneta : MonoBehaviour
 
     private Rigidbody rb;
     private Planeta planetaActual;
+    
+    Vector3 empujonDireccion;
+    float empujonFuerza;
+    float empujonTiempo;
+    bool enEmpujon;
 
     private bool enPlaneta;
     private bool estabaEnPlaneta;
@@ -44,8 +49,22 @@ public class JugadorPlaneta : MonoBehaviour
             {
                 Vector3 up = ObtenerUpActual();
 
+                // Quitamos la velocidad vertical previa
                 rb.velocity -= Vector3.Project(rb.velocity, up);
-                rb.AddForce(up * fuerzaSalto, ForceMode.Impulse);
+
+                // Movimiento actual del jugador sobre la superficie
+                Vector3 movimientoPlano = Vector3.ProjectOnPlane(rb.velocity, up);
+
+                // Salto base hacia arriba
+                Vector3 fuerzaSaltoFinal = up * fuerzaSalto;
+
+                // Si se está moviendo agregamos impulso hacia adelante
+                if (movimientoPlano.magnitude > 0.1f)
+                {
+                    fuerzaSaltoFinal += movimientoPlano.normalized * (fuerzaSalto * 0.4f);
+                }
+
+                rb.AddForce(fuerzaSaltoFinal, ForceMode.Impulse);
             }
 
             saltoMovil = false; // se limpia siempre
@@ -55,6 +74,19 @@ public class JugadorPlaneta : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (enEmpujon)
+        {
+            rb.velocity = empujonDireccion * empujonFuerza;
+
+            empujonTiempo -= Time.fixedDeltaTime;
+
+            if (empujonTiempo <= 0)
+            {
+                enEmpujon = false;
+            }
+
+            return;
+        }
         if (superficieActual != null &&
             superficieActual.EstaEnRango(transform.position))
         {
@@ -251,8 +283,14 @@ public class JugadorPlaneta : MonoBehaviour
         return Physics.Raycast(transform.position, direccion, distanciaSuelo, capaSuelo);
     }
 
+    public void RecibirEmpujon(Vector3 direccion, float fuerza, float tiempo)
+    {
+        empujonDireccion = direccion;
+        empujonFuerza = fuerza;
+        empujonTiempo = tiempo;
+        enEmpujon = true;
+    }
 
 
-    
 
 }
