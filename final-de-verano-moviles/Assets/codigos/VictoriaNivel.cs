@@ -69,13 +69,13 @@ public class VictoriaNivel : MonoBehaviour
         while (tiempo < duracion)
         {
             int random = Random.Range(0, 200);
-            textoMonedas.text = "Monedas: " + random;
+            textoMonedas.text = "Estrellas: " + random;
 
             tiempo += 0.05f;
             yield return new WaitForSeconds(0.05f);
         }
 
-        textoMonedas.text = "Monedas: " + monedasReal;
+        textoMonedas.text = "Estrellas: " + monedasReal;
     }
 
     // BOTONES
