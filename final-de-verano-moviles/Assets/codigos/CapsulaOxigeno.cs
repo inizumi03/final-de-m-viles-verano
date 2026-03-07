@@ -13,7 +13,7 @@ public class CapsulaOxigeno : MonoBehaviour
         if (sistema != null)
         {
             sistema.AgregarOxigeno(cantidadOxigeno);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

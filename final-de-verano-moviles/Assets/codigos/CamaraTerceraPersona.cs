@@ -19,6 +19,19 @@ public class CamaraTerceraPersona : MonoBehaviour
     public float inclinacionSalto = 15f;
     public float distanciaRaycastSuelo = 1.3f;
 
+    void Start()
+    {
+        // Fuerza la orientación horizontal
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+
+        // Opcional: permitir ambas horizontales
+        Screen.autorotateToLandscapeLeft = true;
+        Screen.autorotateToLandscapeRight = true;
+
+        // Desactivar vertical
+        Screen.autorotateToPortrait = false;
+        Screen.autorotateToPortraitUpsideDown = false;
+    }
     void LateUpdate()
     {
         if (jugador == null) return;
