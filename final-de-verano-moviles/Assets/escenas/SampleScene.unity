@@ -2548,8 +2548,8 @@ Transform:
   m_GameObject: {fileID: 127148094}
   serializedVersion: 2
   m_LocalRotation: {x: -0.39588615, y: -0.74572295, z: 0.1169265, w: 0.5229719}
-  m_LocalPosition: {x: -1452.163, y: 237.08372, z: -679.115}
-  m_LocalScale: {x: 1, y: 1, z: 1.0686133}
+  m_LocalPosition: {x: -1441.4017, y: 234.1278, z: -673.8654}
+  m_LocalScale: {x: 1, y: 1, z: 1.1483514}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 459655094}
@@ -6905,7 +6905,7 @@ MonoBehaviour:
   prefabDrop: {fileID: 195422769174654567, guid: 2d8feb5ae9305934a9deaefa758c7da5,
     type: 3}
   fuerzaEmpujon: 70
-  tiempoEmpujon: 0.25
+  tiempoEmpujon: 0.5
 --- !u!54 &417444599
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14800,7 +14800,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.39588615, y: -0.74572295, z: 0.1169265, w: 0.5229719}
   m_LocalPosition: {x: -146.63118, y: -146.30078, z: -80.86587}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1.0898}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1276842531}
@@ -16730,7 +16730,7 @@ MonoBehaviour:
   prefabDrop: {fileID: 195422769174654567, guid: 2d8feb5ae9305934a9deaefa758c7da5,
     type: 3}
   fuerzaEmpujon: 70
-  tiempoEmpujon: 0.25
+  tiempoEmpujon: 0.5
 --- !u!54 &842897363
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22026,7 +22026,7 @@ MonoBehaviour:
   prefabDrop: {fileID: 195422769174654567, guid: 2d8feb5ae9305934a9deaefa758c7da5,
     type: 3}
   fuerzaEmpujon: 70
-  tiempoEmpujon: 0.25
+  tiempoEmpujon: 0.5
 --- !u!54 &1184001143
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22848,7 +22848,7 @@ MonoBehaviour:
   prefabDrop: {fileID: 195422769174654567, guid: 2d8feb5ae9305934a9deaefa758c7da5,
     type: 3}
   fuerzaEmpujon: 70
-  tiempoEmpujon: 0.25
+  tiempoEmpujon: 0.5
 --- !u!54 &1262259014
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -23183,7 +23183,7 @@ MonoBehaviour:
   prefabDrop: {fileID: 195422769174654567, guid: 2d8feb5ae9305934a9deaefa758c7da5,
     type: 3}
   fuerzaEmpujon: 70
-  tiempoEmpujon: 0.25
+  tiempoEmpujon: 0.5
 --- !u!54 &1278170002
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -23316,7 +23316,7 @@ MonoBehaviour:
   prefabDrop: {fileID: 195422769174654567, guid: 2d8feb5ae9305934a9deaefa758c7da5,
     type: 3}
   fuerzaEmpujon: 70
-  tiempoEmpujon: 0.25
+  tiempoEmpujon: 0.5
 --- !u!54 &1284961783
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -29398,7 +29398,7 @@ MonoBehaviour:
   prefabDrop: {fileID: 195422769174654567, guid: 2d8feb5ae9305934a9deaefa758c7da5,
     type: 3}
   fuerzaEmpujon: 70
-  tiempoEmpujon: 0.25
+  tiempoEmpujon: 0.5
 --- !u!54 &1595533004
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -30034,8 +30034,8 @@ Transform:
   m_GameObject: {fileID: 1604652170}
   serializedVersion: 2
   m_LocalRotation: {x: -0.39588615, y: -0.74572295, z: 0.1169265, w: 0.5229719}
-  m_LocalPosition: {x: -1426.4858, y: 105.9393, z: -805.59766}
-  m_LocalScale: {x: 1, y: 1, z: 1.0686133}
+  m_LocalPosition: {x: -1413.2686, y: 102.3087, z: -799.1499}
+  m_LocalScale: {x: 1, y: 1, z: 1.1666355}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1469117442}
@@ -31899,7 +31899,7 @@ MonoBehaviour:
   prefabDrop: {fileID: 195422769174654567, guid: 2d8feb5ae9305934a9deaefa758c7da5,
     type: 3}
   fuerzaEmpujon: 70
-  tiempoEmpujon: 0.25
+  tiempoEmpujon: 1
 --- !u!4 &1719238138 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400012, guid: 6520c6d7889f4c72b416f07f34edd515,
@@ -33668,8 +33668,8 @@ Transform:
   m_GameObject: {fileID: 1765395060}
   serializedVersion: 2
   m_LocalRotation: {x: -0.39588615, y: -0.74572295, z: 0.1169265, w: 0.5229719}
-  m_LocalPosition: {x: -382.71426, y: -90.35306, z: -186.80252}
-  m_LocalScale: {x: 1, y: 1, z: 1.2811002}
+  m_LocalPosition: {x: -369.6955, y: -93.9292, z: -180.4517}
+  m_LocalScale: {x: 1, y: 1, z: 1.3497671}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1900041999}
@@ -33918,7 +33918,7 @@ MonoBehaviour:
   prefabDrop: {fileID: 195422769174654567, guid: 2d8feb5ae9305934a9deaefa758c7da5,
     type: 3}
   fuerzaEmpujon: 70
-  tiempoEmpujon: 0.25
+  tiempoEmpujon: 0.5
 --- !u!54 &1805388443
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -34045,7 +34045,7 @@ MonoBehaviour:
   prefabDrop: {fileID: 195422769174654567, guid: 2d8feb5ae9305934a9deaefa758c7da5,
     type: 3}
   fuerzaEmpujon: 70
-  tiempoEmpujon: 0.25
+  tiempoEmpujon: 0.5
 --- !u!54 &1809504695
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -36148,7 +36148,7 @@ MonoBehaviour:
   prefabDrop: {fileID: 195422769174654567, guid: 2d8feb5ae9305934a9deaefa758c7da5,
     type: 3}
   fuerzaEmpujon: 70
-  tiempoEmpujon: 0.25
+  tiempoEmpujon: 0.5
 --- !u!54 &1923682984
 Rigidbody:
   m_ObjectHideFlags: 0
