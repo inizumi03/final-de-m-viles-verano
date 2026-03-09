@@ -17553,6 +17553,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1054393484918582890, guid: e970eb9cfd4e1fd4893cc94cbd74affc,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 124f1f876453baf45afac1c170265de6, type: 2}
     - target: {fileID: 5199147958679397924, guid: e970eb9cfd4e1fd4893cc94cbd74affc,
         type: 3}
       propertyPath: m_Layer
@@ -22784,6 +22789,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23707714729649572, guid: f9f423b8b41208145936c893228ffc9c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bf0cdf7d33fb9cc4a86bbe31978b6270, type: 2}
     - target: {fileID: 276716820405486304, guid: f9f423b8b41208145936c893228ffc9c,
         type: 3}
       propertyPath: m_Layer
@@ -33370,7 +33380,7 @@ LightingSettings:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   serializedVersion: 6
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_EnableBakedLightmaps: 1
   m_EnableRealtimeLightmaps: 0
   m_RealtimeEnvironmentLighting: 1
@@ -35551,6 +35561,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23102039698436130, guid: 1d55239664db5df4c933d07e26e9b360,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ab2405dcb0e1794fb34911d36ad23a1, type: 2}
     - target: {fileID: 435877214957245906, guid: 1d55239664db5df4c933d07e26e9b360,
         type: 3}
       propertyPath: m_Layer
